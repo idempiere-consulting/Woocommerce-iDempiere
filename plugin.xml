@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="it.idIta.woocommerce.process.WooCommerceGet"
+         point="org.adempiere.base.Process">
+      <process
+            class="it.idIta.woocommerce.process.WooCommerceGet">
+      </process>
+   </extension>
+   <extension
+         id="it.idIta.woocommerce.process.WooOrders"
+         point="org.adempiere.base.Process">
+      <process
+            class="it.idIta.woocommerce.process.WooOrders">
+      </process>
+   </extension>
+   <extension
+         id="it.idIta.woocommerce.process.WooSyncPrice"
+         point="org.adempiere.base.Process">
+      <process
+            class="it.idIta.woocommerce.process.WooSyncPrice">
+      </process>
+   </extension>
+   <extension
+         id="it.idIta.woocommerce.process.WooSyncStock"
+         point="org.adempiere.base.Process">
+      <process
+            class="it.idIta.woocommerce.process.WooSyncStock">
+      </process>
+   </extension>
+
+</plugin>
