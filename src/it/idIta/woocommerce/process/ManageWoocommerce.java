@@ -24,6 +24,8 @@ import it.idIta.woocommerce.pojo.Category;
 import it.idIta.woocommerce.pojo.Image;
 import it.idIta.woocommerce.pojo.Order;
 import it.idIta.woocommerce.pojo.Product;
+import it.idIta.woocommerce.pojo.ProductAttribute;
+import it.idIta.woocommerce.pojo.ProductAttributeTerm;
 
 public class ManageWoocommerce {
 
@@ -102,6 +104,22 @@ public class ManageWoocommerce {
 		return orders;
 	}
 	
+	public Product getProductBySKU(String p_sku) {
+		Product prd = null;
+		
+		Map<String, String> params = new HashMap<>();
+		params.put("sku", p_sku);
+		List<?> wcProducts = wCommerce.getAll(EndpointBaseType.PRODUCTS.getValue(), params);
+		
+		if(wcProducts!=null && wcProducts.size()>0) { 
+			List<Product>products = new ArrayList<Product>();
+			mapper = new ObjectMapper();
+			products = mapper.convertValue(wcProducts, new TypeReference<List<Product>>() {});
+			prd = products.get(0);
+		}
+		return prd;
+	}
+	
 	public void updateProductsTOpost(List<Product> listWoo, boolean createNew){
 		mapper = new ObjectMapper();
 		List<Map<String, Object>> listCreate = new ArrayList<Map<String, Object>>();
@@ -142,6 +160,66 @@ public class ManageWoocommerce {
 		TreeMap<String, Object> batchMap = new TreeMap<String, Object>();
 		batchMap.put(keyBatch, listCreate);
 		wCommerce.batch(EndpointBaseType.ORDERS.getValue(), batchMap);
+	}
+	
+	public List<ProductAttribute> updateProdAttributeTOpost(List<ProductAttribute> listProductAttr ,boolean createNew) {
+		mapper = new ObjectMapper();
+		List<Map<String, Object>> listCreate = new ArrayList<Map<String, Object>>();
+		Map<String, Object> map = null;
+		for(ProductAttribute prdAtt: listProductAttr) {
+			map = mapper.convertValue(prdAtt, new TypeReference<Map<String, Object>>() {});
+			listCreate.add(map);
+		}
+		String keyBatch = (createNew)?"create":"update";
+		TreeMap<String, Object> batchMap = new TreeMap<String, Object>();
+		batchMap.put(keyBatch, listCreate);
+		Map<?,?> response = wCommerce.batch(EndpointBaseType.PRODUCTS_ATTRIBUTES.getValue(), batchMap);
+		List<ProductAttribute> listResponse = new ArrayList<ProductAttribute>();
+		for(Map.Entry<?, ?> entry: response.entrySet()) {
+			List<Map<String, Object>> value = (List<Map<String, Object>>) entry.getValue();
+			for (Map<String, Object> map2 : value) {
+				if(map2.get("id")!=null && ((Integer)map2.get("id")).intValue()==0)
+					continue;
+				else {
+					mapper = new ObjectMapper();
+					ProductAttribute prd = mapper.convertValue(map2, new TypeReference<ProductAttribute>(){});
+					listResponse.add(prd);
+				}
+			}
+			//ArrayList<E>
+		}
+		return listResponse;
+	
+	}
+	
+	public List<ProductAttributeTerm> updateProdAttributeTermTOpost(List<ProductAttributeTerm> listProductAttrTerm ,boolean createNew, int idProductAttribute) {
+		mapper = new ObjectMapper();
+		List<Map<String, Object>> listCreate = new ArrayList<Map<String, Object>>();
+		Map<String, Object> map = null;
+		for(ProductAttributeTerm prdAttTerm: listProductAttrTerm) {
+			map = mapper.convertValue(prdAttTerm, new TypeReference<Map<String, Object>>() {});
+			listCreate.add(map);
+		}
+		String keyBatch = (createNew)?"create":"update";
+		TreeMap<String, Object> batchMap = new TreeMap<String, Object>();
+		batchMap.put(keyBatch, listCreate);
+		Map<?,?> response = wCommerce.batchExtra(EndpointBaseType.PRODUCTS_ATTRIBUTES_TERMS.getValue(), batchMap, true, idProductAttribute);
+		List<ProductAttributeTerm> listResponse = new ArrayList<ProductAttributeTerm>();
+		for(Map.Entry<?, ?> entry: response.entrySet()) {
+			List<Map<String, Object>> value = (List<Map<String, Object>>) entry.getValue();
+			for (Map<String, Object> map2 : value) {
+				if(map2.get("id")!=null && ((Integer)map2.get("id")).intValue()==0)
+					continue;
+				else {
+					mapper = new ObjectMapper();
+					ProductAttributeTerm prd = mapper.convertValue(map2, new TypeReference<ProductAttributeTerm>(){});
+					listResponse.add(prd);
+				}
+			}
+			//ArrayList<E>
+		}
+		return listResponse;
+	
 	}
 	
 	private boolean saveProductWoo(Product responseProd, DateTimeFormatter formatDateTime){

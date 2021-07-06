@@ -64,4 +64,16 @@ public class WooCommerceAPI implements Woocommerce {
         return client.post(url, OAuthSignature.getAsMap(config, url, HttpMethod.POST), object);
     }
 
+	@Override
+	public Map<?, ?> batchExtra(String endpointBase, Map<String, Object> object, boolean isExtraProductTerm,
+			int idExtra) {
+		if(isExtraProductTerm && idExtra>0) {
+			//Example ---> PRODUCTS_ATTRIBUTES_TERMS("products/attributes/%d/terms") [endPointBase]
+			endpointBase = String.format(endpointBase, idExtra);
+		}
+		return batch(endpointBase, object);
+	}
+    
+    
+
 }

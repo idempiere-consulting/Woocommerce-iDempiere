@@ -10,6 +10,7 @@ public enum EndpointBaseType {
     ORDERS("orders"),
     PRODUCTS("products"),
     PRODUCTS_ATTRIBUTES("products/attributes"),
+    PRODUCTS_ATTRIBUTES_TERMS("products/attributes/%d/terms"),
     PRODUCTS_CATEGORIES("products/categories"),
     PRODUCTS_SHIPPING_CLASSES("products/shipping_classes"),
     PRODUCTS_TAGS("products/tags"),

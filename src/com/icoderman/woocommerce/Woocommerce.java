@@ -73,5 +73,16 @@ public interface Woocommerce {
      * @return response Map with WooCommerce entities implicated
      */
     Map<?, ?> batch(String endpointBase, Map<String, Object> object);
+    
+    /**
+     * Makes batch operations on WooCommerce entities
+     *
+     * @param endpointBase 		  API endpoint base @see EndpointBaseType
+     * @param object       		  Map with lists of entities
+     * @param isExtraProductTerm  abilty extra endpoint
+     * @param idExtra			  idProduct Attribute
+     * @return response Map with WooCommerce entities implicated
+     */
+    Map<?, ?> batchExtra(String endpointBase, Map<String, Object> object, boolean isExtraProductTerm, int idExtra);
 
 }

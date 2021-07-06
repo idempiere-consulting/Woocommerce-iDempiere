@@ -169,7 +169,6 @@ public class Product {
     @JsonProperty("weight")
     private String weight;
     @JsonProperty("dimensions")
-
     private Dimensions dimensions;
     @JsonProperty("shipping_required")
     private boolean shippingRequired;
@@ -205,7 +204,7 @@ public class Product {
     private List<Image> images = null;
     @JsonProperty("attributes")
 
-    private List<Object> attributes = null;
+    private List<AttributeIntoProduct> attributes = null;
     @JsonProperty("default_attributes")
 
     private List<Object> defaultAttributes = null;
@@ -1113,16 +1112,16 @@ public class Product {
     }
 
     @JsonProperty("attributes")
-    public List<Object> getAttributes() {
+    public List<AttributeIntoProduct> getAttributes() {
         return attributes;
     }
 
     @JsonProperty("attributes")
-    public void setAttributes(List<Object> attributes) {
+    public void setAttributes(List<AttributeIntoProduct> attributes) {
         this.attributes = attributes;
     }
 
-    public Product withAttributes(List<Object> attributes) {
+    public Product withAttributes(List<AttributeIntoProduct> attributes) {
         this.attributes = attributes;
         return this;
     }
