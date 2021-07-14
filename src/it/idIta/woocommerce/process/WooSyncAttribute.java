@@ -150,7 +150,7 @@ public class WooSyncAttribute extends SvrProcess {
 	
 	private void synchronizeAttributeToProduct(ManageWoocommerce manageWoocommerce) {
 		// "SELECT ad_client_id, ad_org_id, product_value, attribute_name1, attribute_name FROM lit_wooprodattribute_v WHERE AD_Client_ID=? order by product_value, attribute_name"
-		List<List<Object>> records_ForProductAttributes =  DB.getSQLArrayObjectsEx(null, "SELECT product_value FROM lit_wooprodattribute_v WHERE AD_Client_ID=? group by product_value", Env.getAD_Client_ID(getCtx()));
+		List<List<Object>> records_ForProductAttributes =  DB.getSQLArrayObjectsEx(null, "SELECT product_sku FROM lit_wooprodattribute_v WHERE AD_Client_ID=? group by product_sku", Env.getAD_Client_ID(getCtx()));
 		
 		if(records_ForProductAttributes.size()>0) {
 			List<Product> listProdutUpdated = new ArrayList<Product>();
@@ -159,6 +159,8 @@ public class WooSyncAttribute extends SvrProcess {
 			Product prd_UPD = null;
 			for (List<Object> object : records_ForProductAttributes) {
 				product_valueSKU = (String)object.get(0);
+				if(product_valueSKU==null || product_valueSKU.trim().length()<=0)
+					continue;
 					
 				Product product_REST = manageWoocommerce.getProductBySKU(product_valueSKU);
 				if(product_REST!=null) {
@@ -167,7 +169,7 @@ public class WooSyncAttribute extends SvrProcess {
 					
 					List<AttributeIntoProduct> attributes = new ArrayList<AttributeIntoProduct>();
 					List<List<Object>> records_1 = DB.getSQLArrayObjectsEx(null, 
-							"SELECT attribute_name1, attribute_name FROM lit_wooprodattribute_v WHERE AD_Client_ID =? and product_value =? order by attribute_name", 
+							"SELECT attribute_name1, attribute_name FROM lit_wooprodattribute_v WHERE AD_Client_ID =? and product_sku =? order by attribute_name", 
 							Env.getAD_Client_ID(getCtx()), product_valueSKU);
 					String atName_tmp = "";
 					String attributeName  = "";

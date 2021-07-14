@@ -263,7 +263,7 @@ public class WooOrders extends SvrProcess {
 
 					listWooOrderComplete.add(orderREST);
 
-					addBufferLog(mOrder.getC_Order_ID(), mOrder.getDateOrdered(), null, "Order Completed n.: "+mOrder.getDocumentNo(), mOrder.get_Table_ID(), mOrder.getC_Order_ID());
+					addLog(mOrder.getC_Order_ID(), mOrder.getDateOrdered(), null, "Order Completed n.: "+mOrder.getDocumentNo(), mOrder.get_Table_ID(), mOrder.getC_Order_ID());
 				}
 			}
 

@@ -184,7 +184,7 @@ public class WooCommerceGet extends SvrProcess {
 				mProduct.saveEx();
 /*				
 				String message = "Product Processed: "+order.getDocumentNo();
-				addBufferLog(order.getC_Order_ID(), order.getDateOrdered(), null, message, order.get_Table_ID(), order.getC_Order_ID());
+				addLog(order.getC_Order_ID(), order.getDateOrdered(), null, message, order.get_Table_ID(), order.getC_Order_ID());
 */				
 				
 				final String sqlupd = "UPDATE " + MProduct.Table_Name
@@ -573,7 +573,7 @@ public class WooCommerceGet extends SvrProcess {
 //					mProduct.saveEx();
 //	/*				
 //					String message = "Product Processed: "+order.getDocumentNo();
-//					addBufferLog(order.getC_Order_ID(), order.getDateOrdered(), null, message, order.get_Table_ID(), order.getC_Order_ID());
+//					addLog(order.getC_Order_ID(), order.getDateOrdered(), null, message, order.get_Table_ID(), order.getC_Order_ID());
 //	*/				
 //					
 //					final String sqlupd = "UPDATE " + MProduct.Table_Name
