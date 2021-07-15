@@ -305,7 +305,7 @@ public class WooCommerceGet extends SvrProcess {
 //				idWoo++;
 		}
 		if(listWoo.size()>0){
-			int limit = 10;
+			int limit = 90;
 			List<Product> tmpLst = new ArrayList<Product>();
 			while(listWoo.size()>0) {
 				if(listWoo.size()<=limit) {
@@ -416,7 +416,7 @@ public class WooCommerceGet extends SvrProcess {
 		}
 		
 		if(listWoo.size()>0){
-			int limit = 10;
+			int limit = 90;
 			List<Product> tmpLst = new ArrayList<Product>();
 			while(listWoo.size()>0) {
 				if(listWoo.size()<=limit) {
@@ -692,7 +692,7 @@ public class WooCommerceGet extends SvrProcess {
 ////					idWoo++;
 //			}
 //			if(listWoo.size()>0){
-//				int limit = 10;
+//				int limit = 90;
 //				List<Product> tmpLst = new ArrayList<Product>();
 //				while(listWoo.size()>0) {
 //					if(listWoo.size()<=limit) {
@@ -803,7 +803,7 @@ public class WooCommerceGet extends SvrProcess {
 //			}
 //			
 //			if(listWoo.size()>0){
-//				int limit = 10;
+//				int limit = 90;
 //				List<Product> tmpLst = new ArrayList<Product>();
 //				while(listWoo.size()>0) {
 //					if(listWoo.size()<=limit) {

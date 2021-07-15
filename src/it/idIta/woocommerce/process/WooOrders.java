@@ -268,7 +268,7 @@ public class WooOrders extends SvrProcess {
 			}
 
 			if(listWooOrderComplete.size()>0){
-				int limit = 10;
+				int limit = 90;
 				List<Order> tmpLst = new ArrayList<Order>();
 				while(listWooOrderComplete.size()>0) {
 					if(listWooOrderComplete.size()<=limit) {

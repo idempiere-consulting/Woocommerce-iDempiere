@@ -74,7 +74,7 @@ public class WooSyncAttribute extends SvrProcess {
 			}
 			records_Attributes = null;
 			
-			int limit = 10;
+			int limit = 90;
 			List<ProductAttribute> tmpLst = new ArrayList<ProductAttribute>();
 			List<ProductAttribute> result = new ArrayList<ProductAttribute>();
 			while(listPAttributeWoo.size()>0) {
@@ -202,7 +202,7 @@ public class WooSyncAttribute extends SvrProcess {
 			}
 			
 			if(listProdutUpdated.size()>0) {
-				int limit = 10;
+				int limit = 90;
 				List<Product> tmpLst = new ArrayList<Product>();
 				while(listProdutUpdated.size()>0) {
 					if(listProdutUpdated.size()<=limit) {

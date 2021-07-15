@@ -106,7 +106,7 @@ public class WooSyncPrice extends SvrProcess {
 		}
 
 		if(listWoo!=null && listWoo.size()>0){
-			int limit = 10;
+			int limit = 90;
 			List<Product> tmpLst = new ArrayList<Product>();
 			while(listWoo.size()>0) {
 				if(listWoo.size()<=limit) {
